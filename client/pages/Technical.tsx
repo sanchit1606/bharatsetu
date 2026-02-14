@@ -180,13 +180,12 @@ export default function Technical() {
           const hasChildren = it.children && it.children.length > 0;
           return (
             <li key={it.id}>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <button
                   onClick={() => scrollTo(it.id, !!hasChildren)}
-                  className={`text-left w-full flex items-center gap-2 py-1 px-2 rounded-md hover:bg-muted transition-colors ${level === 0 ? "font-semibold" : "text-sm"}`}
+                  className={`flex-1 text-left py-1 px-2 rounded-md hover:bg-muted transition-colors ${level === 0 ? "font-semibold" : "text-sm"}`}
                 >
-                  <span className="w-6 text-xs text-foreground/70" />
-                  <span>{it.title}</span>
+                  <span className="block">{it.title}</span>
                 </button>
                 {hasChildren && (
                   <button onClick={() => toggle(it.id)} className="ml-2 text-sm text-foreground/60 hover:text-foreground">
@@ -233,33 +232,94 @@ export default function Technical() {
 
             <h2 id="1" className="mt-8 mb-4">1. System Architecture</h2>
             <h3 id="1.1" className="mt-4 mb-2">1.1 Technology Stack</h3>
-            <h4 id="1.1.1">Frontend</h4>
-            <ul className="ml-6 list-disc space-y-1">
-              <li><strong>Framework:</strong> React.js</li>
-              <li><strong>Visualization:</strong> Recharts/Chart.js for data presentation</li>
-              <li><strong>OCR:</strong> Tesseract.js (client-side processing)</li>
-              <li><strong>Speech Recognition:</strong> Web Speech API</li>
-              <li><strong>Deployment:</strong> Vercel (free tier)</li>
-            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Frontend table */}
+              <div>
+                <table className="w-full text-sm table-auto border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="text-left pb-2">Frontend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-1"><strong>Framework:</strong> React.js</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>Visualization:</strong> Recharts / Chart.js</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>OCR:</strong> Tesseract.js (client-side)</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>Speech Recognition:</strong> Web Speech API</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>Deployment:</strong> Vercel (free tier)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-            <h4 id="1.1.2" className="mt-4">Backend</h4>
-            <ul className="ml-6 list-disc space-y-1">
-              <li><strong>Framework:</strong> FastAPI (Python)</li>
-              <li><strong>Primary LLM:</strong> Google Gemini 1.5 Flash (15 RPM, 1M TPM free tier)</li>
-              <li><strong>Fallback LLM:</strong> Groq (Llama 3.1 70B) for overflow traffic</li>
-              <li><strong>OCR Fallback:</strong> Google Cloud Vision API (1000 requests/month free)</li>
-              <li><strong>Translation:</strong> Google Translate API (free quota)</li>
-              <li><strong>Deployment:</strong> Render.com (750 hours/month free tier)</li>
-            </ul>
+              {/* Backend table */}
+              <div>
+                <table className="w-full text-sm table-auto border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="text-left pb-2">Backend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-1"><strong>Framework:</strong> FastAPI (Python)</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>Primary LLM:</strong> Google Gemini 1.5 Flash</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>Fallback LLM:</strong> Groq (Llama 3.1 70B)</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>OCR Fallback:</strong> Google Cloud Vision API</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>Translation:</strong> Google Translate API</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>Deployment:</strong> Render.com (free tier)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-            <h4 id="1.1.3" className="mt-4">Data Storage</h4>
-            <ul className="ml-6 list-disc space-y-1">
-              <li><strong>Static Knowledge Base:</strong> JSON files (in-memory loading)</li>
-              <li><strong>Vector Database:</strong> ChromaDB (local, in-memory) for RAG operations</li>
-              <li><strong>Optional Session Storage:</strong> Firebase Firestore (1 GB free, 50K reads/day)</li>
-              <li><strong>File Storage:</strong> Cloudinary (25 GB free tier)</li>
-              <li><strong>Embedding Model:</strong> all-MiniLM-L6-v2 (local, open-source)</li>
-            </ul>
+              {/* Data Storage table */}
+              <div>
+                <table className="w-full text-sm table-auto border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="text-left pb-2">Data Storage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-1"><strong>Static KB:</strong> JSON files (in-memory)</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>Vector DB:</strong> ChromaDB (local, in-memory)</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>Optional Session:</strong> Firebase Firestore</td>
+                    </tr>
+                    <tr className="bg-muted/5">
+                      <td className="py-1"><strong>File Storage:</strong> Cloudinary (25 GB free)</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1"><strong>Embedding Model:</strong> all-MiniLM-L6-v2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
             <h3 id="1.2" className="mt-6">1.2 Design Principles</h3>
             <ul className="ml-6 list-disc space-y-1">
@@ -437,7 +497,320 @@ export default function Technical() {
               <li>Aggregate statistics for heat map visualization</li>
             </ul>
 
-            {/* Remaining sections omitted for brevity in this patch - full content to be added */}
+            <h2 id="4" className="mt-8">4. Feature 3: Document Jargon & Legal/Financial Rights Assistant</h2>
+
+            <h3 id="4.1" className="mt-4">4.1 Problem Statement</h3>
+            <p>A majority of Indians are not aware of their fundamental and legal rights, leading to repeated rights violations [5]. Complex legal language, fee barriers, and bureaucratic jargon prevent citizens from claiming entitlements. Low-income groups often sign unjust contracts due to ignorance of legal protections.</p>
+
+            <h3 id="4.2" className="mt-4">4.2 Solution Overview</h3>
+            <p>This assistant interprets laws and rights in conversational terms, simplifies government documents, and provides step-by-step guidance for claiming entitlements. Users can upload documents for automatic simplification or ask questions about their rights.</p>
+
+            <h3 id="4.3" className="mt-4">4.3 Technical Architecture</h3>
+            <h4 id="4.3.1" className="mt-3">Components</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li><strong>OCR:</strong> Tesseract.js for document text extraction</li>
+              <li><strong>Simplification:</strong> Gemini Flash for plain-language rewriting</li>
+              <li><strong>Legal Knowledge Base:</strong> Curated FAQ database (50-100 common scenarios)</li>
+              <li><strong>RAG System:</strong> ChromaDB with legal document embeddings</li>
+              <li><strong>Translation:</strong> Google Translate API for regional language support</li>
+            </ul>
+
+            <h4 id="4.3.2" className="mt-3">Knowledge Base Structure</h4>
+            <p><strong>Static legal FAQ database (Type 1 - JSON file):</strong></p>
+            <div className="relative">
+              <button onClick={() => copyToClipboard(`{
+  "tenant_rights": {
+    "question": "Can landlord increase rent without notice?",
+    "answer": "No. Under Model Tenancy Act 2021...",
+    "source": "Model Tenancy Act 2021, Section 7",
+    "category": "housing",
+    "hindi_answer": "नहीं। मॉडल टेनेंसी एक्ट..."
+  }
+}`)} className="absolute right-2 top-2 text-xs px-2 py-1 border rounded">Copy</button>
+              <pre className="ml-6"><code>{`{
+  "tenant_rights": {
+    "question": "Can landlord increase rent without notice?",
+    "answer": "No. Under Model Tenancy Act 2021...",
+    "source": "Model Tenancy Act 2021, Section 7",
+    "category": "housing",
+    "hindi_answer": "नहीं। मॉडल टेनेंसी एक्ट..."
+  }
+}`}</code></pre>
+            </div>
+
+            <p className="mt-3"><strong>Vector embeddings database (Type 2 - ChromaDB):</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Legal document chunks from IndiaCode.nic.in</li>
+              <li>Embeddings generated using all-MiniLM-L6-v2</li>
+              <li>Metadata includes source, act name, section numbers</li>
+            </ul>
+
+            <h4 id="4.3.3" className="mt-3">Query Processing Flow</h4>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li>User question received (text or voice)</li>
+              <li>Fuzzy matching against FAQ database using FuzzyWuzzy</li>
+              <li>If no match: RAG search through legal documents</li>
+              <li>Gemini Flash generates plain-language answer</li>
+              <li>Source citation added (act name, section)</li>
+              <li>Translation to user's preferred language</li>
+            </ol>
+
+            <h3 id="4.4" className="mt-6">4.4 Data Sources</h3>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>IndiaCode.nic.in: Government legal database</li>
+              <li>DistrictCourtsOfIndia.nic.in: Court judgments and procedures</li>
+              <li>LegalServicesIndia.com: Curated articles</li>
+              <li>Manual curation of 50-100 common legal scenarios</li>
+            </ul>
+
+            <h3 id="4.5" className="mt-6">4.5 Data Storage</h3>
+            <ul className="ml-6 list-disc space-y-1">
+              <li><strong>Legal KB:</strong> JSON file (5-10 MB) loaded in-memory</li>
+              <li><strong>Vector Database:</strong> ChromaDB local persistence (50-100 MB)</li>
+              <li><strong>User uploads:</strong> Cloudinary temporary storage, auto-deleted post-processing</li>
+              <li><strong>Session data:</strong> Firebase Firestore (optional, anonymous)</li>
+            </ul>
+
+            <hr className="my-6" />
+
+            <h2 id="5" className="mt-6">5. Feature 4: Lab Report Analyzer</h2>
+            <h3 id="5.1" className="mt-4">5.1 Problem Statement</h3>
+            <p>Research shows only 39% of patients can correctly identify from a standard pathology report whether they have cancer [6]. Patients routinely receive complex lab reports without adequate explanation, leading to anxiety and poor follow-through on health recommendations.</p>
+
+            <h3 id="5.2" className="mt-4">5.2 Solution Scope</h3>
+            <p><strong>Important Limitation:</strong></p>
+            <p>This is an educational tool for value comparison only. It does NOT diagnose conditions, provide medical advice, or replace doctor consultation. The system compares lab values against standard reference ranges and suggests general wellness approaches.</p>
+
+            <h3 id="5.3" className="mt-4">5.3 Technical Architecture</h3>
+            <h4 id="5.3.1" className="mt-3">Processing Pipeline</h4>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li><strong>User Input:</strong> Lab report (PDF/DOC/image) + age + gender + optional conditions</li>
+              <li><strong>OCR Extraction:</strong> Tesseract.js (client-side) with Google Cloud Vision fallback</li>
+              <li><strong>Value Parsing:</strong> Gemini Flash structures data into JSON</li>
+              <li><strong>Reference Comparison:</strong> Match values against WHO/ICMR standards by age/gender</li>
+              <li><strong>Diet Suggestions:</strong> Gemini generates general wellness recommendations</li>
+              <li><strong>Visualization:</strong> React displays bar charts with color-coded ranges</li>
+            </ol>
+
+            <h4 id="5.3.2" className="mt-3">Reference Ranges Database</h4>
+            <div className="relative">
+              <button onClick={() => copyToClipboard(`{
+  "hemoglobin": {
+    "male": {
+      "age_18_50": {"min": 13.5, "max": 17.5, "unit": "g/dL"}
+    },
+    "female": {
+      "age_18_50": {"min": 12.0, "max": 15.5, "unit": "g/dL"}
+    }
+  },
+  "glucose_fasting": {
+    "all": {
+      "normal": {"min": 70, "max": 100, "unit": "mg/dL"},
+      "prediabetes_warning": {"min": 100, "max": 125},
+      "consult_doctor": {"min": 126}
+    }
+  }
+}`)} className="absolute right-2 top-2 text-xs px-2 py-1 border rounded">Copy</button>
+              <pre className="ml-6"><code>{`{
+  "hemoglobin": {
+    "male": {
+      "age_18_50": {"min": 13.5, "max": 17.5, "unit": "g/dL"}
+    },
+    "female": {
+      "age_18_50": {"min": 12.0, "max": 15.5, "unit": "g/dL"}
+    }
+  },
+  "glucose_fasting": {
+    "all": {
+      "normal": {"min": 70, "max": 100, "unit": "mg/dL"},
+      "prediabetes_warning": {"min": 100, "max": 125},
+      "consult_doctor": {"min": 126}
+    }
+  }
+}`}</code></pre>
+            </div>
+
+            <h4 id="5.3.3" className="mt-4">User Interface Features</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Mandatory disclaimer popup before feature access</li>
+              <li>OCR verification step (user confirms extracted values)</li>
+              <li>Visual comparison charts (your value vs. healthy range)</li>
+              <li>Color coding: Green (normal), Yellow (borderline), Red (outside range)</li>
+              <li>India-specific diet suggestions (palak, dal, amla, etc.)</li>
+              <li>Prominent disclaimers throughout interface</li>
+              <li>Downloadable summary PDF (saved locally, not on server)</li>
+            </ul>
+
+            <h3 id="5.4" className="mt-6">5.4 Privacy and Safety</h3>
+            <p><strong>Data Storage: ZERO</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>All processing in-memory</li>
+              <li>No retention of lab reports, values, or personal information</li>
+              <li>Session data deleted when tab closes</li>
+              <li>Anonymous usage statistics only (test categories, not values)</li>
+            </ul>
+            <p className="mt-2"><strong>Safety Measures:</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Rate limiting: 5 reports per hour per device</li>
+              <li>File validation: PDF/JPG/PNG only, max 10 MB</li>
+              <li>Emergency detection: Flags critical values with urgent warning</li>
+              <li>Mandatory Terms of Service acceptance before use</li>
+            </ul>
+
+            <hr className="my-6" />
+
+            <h2 id="6" className="mt-6">6. Feature 5: GynaeCare Women's Health Module</h2>
+            <h3 id="6.1" className="mt-4">6.1 Problem Statement</h3>
+            <p>A systematic review found only 48% of adolescent girls in India knew about menstruation before their first period [7]. Cultural taboos and lack of education persist. Regarding PCOS, which affects 6-13% of women globally (up to 20% in India), approximately 45% of affected women knew nothing about the condition even after multiple doctor visits [8].</p>
+
+            <h3 id="6.2" className="mt-4">6.2 Solution Overview</h3>
+            <p>GynaeCare provides stigma-free, verified information about menstrual health, PCOS, pregnancy basics, and general wellness through an anonymous chatbot interface. The system uses retrieval-augmented generation (RAG) to provide accurate answers sourced from WHO, UNICEF, and NHS materials.</p>
+
+            <h3 id="6.3" className="mt-4">6.3 Technical Architecture</h3>
+            <h4 id="6.3.1" className="mt-3">Core Modules</h4>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li><strong>Menstrual Health Education:</strong> Cycle explanation, hygiene products, myth-busting</li>
+              <li><strong>PCOS Awareness:</strong> Symptoms checklist, lifestyle management, when to seek help</li>
+              <li><strong>Pregnancy Basics:</strong> Trimester changes, nutrition, warning signs</li>
+              <li><strong>General Wellness:</strong> Breast health, mental health, contraception basics</li>
+            </ol>
+
+            <h4 id="6.3.2" className="mt-3">RAG Implementation</h4>
+            <p><strong>Knowledge Base Creation:</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Curated content from WHO, UNICEF, NHS, National Health Mission India</li>
+              <li>JSON format with English and Hindi translations</li>
+              <li>Size: 20-50 MB comprehensive knowledge base</li>
+              <li>Embedded using all-MiniLM-L6-v2 (local model)</li>
+              <li>Stored in ChromaDB (in-memory)</li>
+            </ul>
+
+            <p><strong>Conversation Flow:</strong></p>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li>User asks question (text or voice, Hindi/English)</li>
+              <li>Query embedded and searched in vector database</li>
+              <li>Top 3 relevant knowledge chunks retrieved</li>
+              <li>Gemini Flash generates empathetic response using context</li>
+              <li>Response includes disclaimer to consult doctor for medical concerns</li>
+              <li>Emergency keywords trigger immediate warning messages</li>
+            </ol>
+
+            <h4 id="6.3.3" className="mt-3">Interactive Features</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li><strong>Myth Buster Quiz:</strong> Swipeable cards with instant explanations</li>
+              <li><strong>PCOS Symptom Checker:</strong> Checkbox interface with personalized suggestions</li>
+              <li><strong>Period Tracker:</strong> Calendar with cycle predictions (100% local storage)</li>
+              <li><strong>Resource Library:</strong> Curated articles, videos, infographics</li>
+            </ul>
+
+            <h3 id="6.4" className="mt-6">6.4 Privacy and Safety</h3>
+            <p><strong>Data Storage: ZERO permanent storage</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>No user identification (anonymous chat)</li>
+              <li>Questions not logged or saved</li>
+              <li>Period tracker data stored in browser localStorage only</li>
+              <li>Optional 24-hour anonymous session cache (conversation count only)</li>
+            </ul>
+
+            <p className="mt-2"><strong>Content Safety:</strong></p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Age-appropriate responses (10-14, 15-25, 25-40 age groups)</li>
+              <li>Blocked keywords: abortion pills, sex determination (illegal in India)</li>
+              <li>Emergency detection for severe symptoms</li>
+              <li>Helpline numbers provided: Medical (108), Women's Helpline (181), Mental Health (1860-2662-345)</li>
+            </ul>
+
+            <hr className="my-6" />
+
+            <h2 id="7" className="mt-6">7. Data Privacy and Security</h2>
+            <h3 id="7.1" className="mt-4">7.1 Privacy-First Design</h3>
+            <p>BharatSetu implements strict data minimization principles, particularly for health-related features. In compliance with India's Digital Personal Data Protection Act (DPDP) 2023, the platform classifies health data as sensitive personal data requiring enhanced protection.</p>
+
+            <h3 id="7.2" className="mt-4">7.2 Data Classification</h3>
+            <h4 id="7.2.1" className="mt-2">NOT Stored (High Risk Data)</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Raw lab reports, medical images, or health documents</li>
+              <li>Personally identifiable health information (PHI)</li>
+              <li>User conversations from GynaeCare module</li>
+              <li>Exact lab values or test results</li>
+              <li>Legal documents with personal information</li>
+            </ul>
+
+            <h4 id="7.2.2" className="mt-2">Safe to Store (Anonymous/Aggregated)</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Anonymous session data (no names, phone numbers, or identifiers)</li>
+              <li>Aggregate statistics (e.g., "1000 glucose tests analyzed today")</li>
+              <li>Feature usage metrics for platform improvement</li>
+              <li>Voluntary user feedback (anonymized)</li>
+              <li>Language preferences and UI settings</li>
+            </ul>
+
+            <h3 id="7.3" className="mt-4">7.3 Security Measures</h3>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Rate limiting on all endpoints (prevents abuse)</li>
+              <li>Input validation and sanitization (prevents injection attacks)</li>
+              <li>File type validation (accepts only documented formats)</li>
+              <li>Automatic data expiry (24-hour maximum for any temporary storage)</li>
+              <li>No login requirement (reduces attack surface)</li>
+              <li>Client-side processing where possible (Tesseract.js OCR)</li>
+            </ul>
+
+            <hr className="my-6" />
+
+            <h2 id="8" className="mt-6">8. Deployment Architecture</h2>
+            <h3 id="8.1" className="mt-4">8.1 Infrastructure</h3>
+            <h4 id="8.1.1" className="mt-2">Frontend Deployment</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li><strong>Platform:</strong> Vercel (free tier)</li>
+              <li><strong>Features:</strong> Automatic HTTPS, global CDN, continuous deployment</li>
+              <li><strong>Build:</strong> React production build with code splitting</li>
+              <li><strong>Limits:</strong> Unlimited bandwidth, 100 GB/month asset serving</li>
+            </ul>
+
+            <h4 id="8.1.2" className="mt-2">Backend Deployment</h4>
+            <ul className="ml-6 list-disc space-y-1">
+              <li><strong>Platform:</strong> Render.com (free tier)</li>
+              <li><strong>Runtime:</strong> FastAPI with Uvicorn ASGI server</li>
+              <li><strong>Limits:</strong> 750 hours/month, automatic sleep after 15 minutes inactivity</li>
+              <li><strong>Alternative:</strong> Railway.app or Fly.io (similar free tiers)</li>
+            </ul>
+
+            <h3 id="8.2" className="mt-4">8.2 Cost Analysis</h3>
+            <table className="w-full text-sm">
+              <thead>
+                <tr><th className="text-left pr-4">Service</th><th className="text-left pr-4">Free Tier Limit</th><th className="text-left">Monthly Cost</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Gemini 1.5 Flash</td><td>1500 requests/day</td><td>$0</td></tr>
+                <tr className="bg-muted/5"><td>Groq (Llama 3.1)</td><td>Generous limits</td><td>$0</td></tr>
+                <tr><td>Vercel Hosting</td><td>100 GB bandwidth</td><td>$0</td></tr>
+                <tr className="bg-muted/5"><td>Render.com</td><td>750 hours/month</td><td>$0</td></tr>
+                <tr><td>Cloudinary</td><td>25 GB storage</td><td>$0</td></tr>
+                <tr className="bg-muted/5"><td>Firebase Firestore</td><td>1 GB, 50K reads/day</td><td>$0</td></tr>
+                <tr><td><strong>Total Monthly Cost</strong></td><td></td><td><strong>$0</strong></td></tr>
+              </tbody>
+            </table>
+
+            <hr className="my-6" />
+
+            <h2 id="9" className="mt-6">9. References</h2>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li>Indian consumer label reading behavior study (2013). Source: Food Safety and Standards Authority of India (FSSAI) consumer awareness reports.</li>
+              <li>India Health Report 2024: Non-communicable diseases burden. Source: Indian Council of Medical Research (ICMR). Available at: https://www.icmr.gov.in</li>
+              <li>World Health Organization (WHO). Noncommunicable diseases country profiles 2023 - India. Available at: https://www.who.int/india/health-topics/noncommunicable-diseases</li>
+              <li>UNICEF India. Water, Sanitation and Hygiene (WASH) Annual Report 2022. Available at: https://www.unicef.org/india/reports/wash-annual-report-2022</li>
+              <li>Legal awareness in India. Source: India Justice Report 2023, Tata Trusts. Available at: https://www.indiajusticereport.org</li>
+              <li>Patient health literacy study on laboratory reports. Source: Journal of Medical Systems, 2021. DOI: 10.1007/s10916-021-01745-2</li>
+              <li>Menstrual health knowledge among adolescent girls in India: A systematic review. Source: Indian Journal of Community Medicine, 2016. DOI: 10.4103/0970-0218.193330</li>
+              <li>PCOS awareness study among Indian women (2021). Source: Journal of Human Reproductive Sciences, Volume 14, Issue 3. DOI: 10.4103/jhrs.JHRS_123_20</li>
+              <li>Food Safety and Standards Authority of India (FSSAI). "Har Label Kuch Kahta Hai" campaign materials. Available at: https://www.fssai.gov.in</li>
+              <li>National Digital Literacy Mission data on language preferences. Source: Ministry of Electronics and Information Technology, Government of India, 2024 report.</li>
+              <li>IndiaCode.nic.in: Repository of Central and State Acts. Ministry of Law and Justice. Available at: https://www.indiacode.nic.in</li>
+              <li>Digital Personal Data Protection Act (DPDP), 2023. Government of India. Available at: https://www.meity.gov.in/data-protection-framework</li>
+              <li>Google Gemini API Documentation. Available at: https://ai.google.dev/docs</li>
+              <li>Tesseract.js - JavaScript OCR Library. Available at: https://github.com/naptha/tesseract.js</li>
+              <li>ChromaDB - Open-source embedding database. Available at: https://www.trychroma.com</li>
+            </ol>
           </div>
         </section>
       </div>
