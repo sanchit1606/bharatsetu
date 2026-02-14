@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type TocItem = {
   id: string;
@@ -203,11 +203,56 @@ export default function Technical() {
 
   const copyToClipboard = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(text);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      // Fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      // Prevent scrolling to bottom
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
     } catch (e) {
       // ignore
     }
   };
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const copyWithFeedback = async (id: string, text: string) => {
+    await copyToClipboard(text);
+    setCopied(id);
+    window.setTimeout(() => setCopied(null), 2000);
+  };
+
+  useEffect(() => {
+    const container = document.querySelector("section.prose");
+    if (!container) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const btn = target.closest("button");
+      if (!btn) return;
+      // identify copy buttons by layout classes
+      if (!(btn.classList.contains("absolute") && btn.classList.contains("right-2"))) return;
+      // attempt to find the next <pre> sibling
+      const pre = btn.nextElementSibling as HTMLElement | null;
+      if (pre && pre.tagName.toLowerCase() === "pre") {
+        const text = pre.innerText;
+        copyToClipboard(text);
+        const prev = btn.innerText;
+        btn.innerText = "Copied";
+        setTimeout(() => {
+          btn.innerText = prev;
+        }, 1800);
+      }
+    };
+    container.addEventListener("click", handler);
+    return () => container.removeEventListener("click", handler);
+  }, []);
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -218,6 +263,19 @@ export default function Technical() {
         </aside>
 
         <section className="prose prose-invert max-w-none">
+          <style>{`
+            pre {
+              background: #f3f4f6;
+              color: #0f172a;
+              padding: 0.75rem;
+              border-radius: 0.375rem;
+              overflow: auto;
+            }
+            pre code {
+              background: transparent;
+              color: inherit;
+            }
+          `}</style>
           <header id="intro" className="text-center max-w-3xl mx-auto py-12">
             <h1 id="brand" className="text-4xl sm:text-5xl font-extrabold mb-3">BharatSetu</h1>
             <h2 id="technical" className="text-xl sm:text-2xl font-semibold mb-2 text-primary">Technical Documentation</h2>
@@ -234,7 +292,7 @@ export default function Technical() {
             <h3 id="1.1" className="mt-4 mb-2">1.1 Technology Stack</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Frontend table */}
-              <div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
                 <table className="w-full text-sm table-auto border-collapse">
                   <thead>
                     <tr>
@@ -262,7 +320,7 @@ export default function Technical() {
               </div>
 
               {/* Backend table */}
-              <div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
                 <table className="w-full text-sm table-auto border-collapse">
                   <thead>
                     <tr>
@@ -293,7 +351,7 @@ export default function Technical() {
               </div>
 
               {/* Data Storage table */}
-              <div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
                 <table className="w-full text-sm table-auto border-collapse">
                   <thead>
                     <tr>
