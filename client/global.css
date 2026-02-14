@@ -1,0 +1,795 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * BharatSetu Color Scheme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+  */
+  :root {
+    /* Primary - Deep Saffron/Orange for action and emphasis */
+    --primary: 27 98% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Rich Blue for trust and stability */
+    --secondary: 212 91% 38%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent - Emerald Green for growth and positivity */
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Neutral colors */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+
+    --muted: 210 16% 82%;
+    --muted-foreground: 210 8% 40%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 14% 88%;
+    --input: 210 14% 88%;
+    --ring: 27 98% 51%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 11% 15%;
+    --sidebar-primary: 27 98% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 142 71% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 14% 88%;
+    --sidebar-ring: 27 98% 51%;
+  }
+
+  .dark {
+    --primary: 27 98% 61%;
+    --primary-foreground: 210 11% 15%;
+
+    --secondary: 212 91% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 142 71% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --background: 210 11% 12%;
+    --foreground: 0 0% 95%;
+
+    --card: 210 11% 18%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 210 11% 18%;
+    --popover-foreground: 0 0% 95%;
+
+    --muted: 210 8% 40%;
+    --muted-foreground: 210 16% 65%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 8% 30%;
+    --input: 210 8% 30%;
+    --ring: 27 98% 61%;
+
+    --sidebar-background: 210 11% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 27 98% 61%;
+    --sidebar-primary-foreground: 210 11% 15%;
+    --sidebar-accent: 142 71% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 8% 30%;
+    --sidebar-ring: 27 98% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-lg transition-all duration-200 bg-primary text-primary-foreground hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-lg transition-all duration-200 bg-secondary text-secondary-foreground hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  .button-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-lg transition-all duration-200 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .card-base {
+    @apply bg-card text-card-foreground rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow duration-200 p-6;
+  }
+
+  .input-base {
+    @apply w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all;
+  }
+
+  /* Custom Button Style from Uiverse.io by cssbuttons-io */
+  .features-button {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .features-button:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+  .features-button:active {
+    transform: translateY(-1px);
+  }
+
+  /* Social Media Buttons from Uiverse.io by vinodjangid07 */
+  .social-card {
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .socialContainer {
+    width: 52px;
+    height: 52px;
+    background-color: rgb(44, 44, 44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: 0.3s;
+    border-radius: 8px;
+  }
+
+  /* Heart Like Button from Uiverse.io by catraco (theme-adapted) */
+  .heart-container {
+    --heart-outline: hsl(var(--foreground) / 0.35);
+    --heart-filled: hsl(0 84% 60%);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+
+    transition:
+      transform 0.2s ease;
+  }
+
+  .heart-container:hover {
+    transform: scale(1.06);
+  }
+
+  .heart-container:active {
+    transform: scale(0.98);
+  }
+
+  .heart-container:focus-within {
+    outline: none;
+  }
+
+  .heart-container .checkbox {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .heart-container .svg-container {
+    position: relative;
+    width: 26px;
+    height: 26px;
+  }
+
+  .heart-container:focus-within .svg-container {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 6px;
+    border-radius: 10px;
+  }
+
+  .heart-container .svg-outline,
+  .heart-container .svg-filled {
+    position: absolute;
+    inset: 0;
+    width: 26px;
+    height: 26px;
+  }
+
+  .heart-container .svg-outline {
+    fill: none;
+  }
+
+  .heart-container .svg-outline path {
+    fill: none;
+    stroke: var(--heart-outline);
+    stroke-width: 1.5;
+  }
+
+  .heart-container .svg-filled {
+    fill: var(--heart-filled);
+    opacity: 0;
+    transform: scale(0.2);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .heart-container .svg-celebrate {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    width: 42px;
+    height: 42px;
+  }
+
+  .heart-container .svg-celebrate polygon {
+    stroke: var(--heart-filled);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .heart-container .checkbox:checked ~ .svg-container .svg-filled {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .heart-container .checkbox:checked ~ .svg-container .svg-outline {
+    opacity: 0;
+  }
+
+  .heart-container .checkbox:checked ~ .svg-container .svg-celebrate {
+    animation: heart-celebrate 0.6s ease forwards;
+  }
+
+  @keyframes heart-celebrate {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.15);
+      opacity: 0;
+    }
+  }
+
+  /* Contact page: Social Media Buttons (scoped) — From Uiverse.io by vinodjangid07 */
+  .contact-social-vinod .card {
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 25px;
+    gap: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+  }
+
+  /* for all social containers*/
+  .contact-social-vinod .socialContainer {
+    width: 52px;
+    height: 52px;
+    background-color: rgb(44, 44, 44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+    border-radius: 0;
+  }
+
+  /* instagram*/
+  .contact-social-vinod .containerOne:hover {
+    background-color: #d62976;
+    transition-duration: .3s;
+  }
+
+  /* twitter*/
+  .contact-social-vinod .containerTwo:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+  }
+
+  /* linkdin*/
+  .contact-social-vinod .containerThree:hover {
+    background-color: #0072b1;
+    transition-duration: .3s;
+  }
+
+  /* Whatsapp*/
+  .contact-social-vinod .containerFour:hover {
+    background-color: #128C7E;
+    transition-duration: .3s;
+  }
+
+  .contact-social-vinod .socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+  }
+
+  .contact-social-vinod .socialSvg {
+    width: 17px;
+  }
+
+  .contact-social-vinod .socialSvg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .contact-social-vinod .socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+  }
+
+  /* Documentation page: Masked button — From Uiverse.io by barisdogansutcu (scoped) */
+  .documentation-masked-btn {
+    border: none;
+    position: relative;
+    width: 200px;
+    height: 73px;
+    padding: 0;
+    z-index: 2;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='868' width='2500' viewBox='0 0 726 252.17'%3E%3Cpath d='M483.92 0S481.38 24.71 466 40.11c-11.74 11.74-24.09 12.66-40.26 15.07-9.42 1.41-29.7 3.77-34.81-.79-2.37-2.11-3-21-3.22-27.62-.21-6.92-1.36-16.52-2.82-18-.75 3.06-2.49 11.53-3.09 13.61S378.49 34.3 378 36a85.13 85.13 0 0 0-30.09 0c-.46-1.67-3.17-11.48-3.77-13.56s-2.34-10.55-3.09-13.61c-1.45 1.45-2.61 11.05-2.82 18-.21 6.67-.84 25.51-3.22 27.62-5.11 4.56-25.38 2.2-34.8.79-16.16-2.47-28.51-3.39-40.21-15.13C244.57 24.71 242 0 242 0H0s69.52 22.74 97.52 68.59c16.56 27.11 14.14 58.49 9.92 74.73C170 140 221.46 140 273 158.57c69.23 24.93 83.2 76.19 90 93.6 6.77-17.41 20.75-68.67 90-93.6 51.54-18.56 103-18.59 165.56-15.25-4.21-16.24-6.63-47.62 9.93-74.73C656.43 22.74 726 0 726 0z'/%3E%3C/svg%3E") no-repeat 50% 50%;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='868' width='2500' viewBox='0 0 726 252.17'%3E%3Cpath d='M483.92 0S481.38 24.71 466 40.11c-11.74 11.74-24.09 12.66-40.26 15.07-9.42 1.41-29.7 3.77-34.81-.79-2.37-2.11-3-21-3.22-27.62-.21-6.92-1.36-16.52-2.82-18-.75 3.06-2.49 11.53-3.09 13.61S378.49 34.3 378 36a85.13 85.13 0 0 0-30.09 0c-.46-1.67-3.17-11.48-3.77-13.56s-2.34-10.55-3.09-13.61c-1.45 1.45-2.61 11.05-2.82 18-.21 6.67-.84 25.51-3.22 27.62-5.11 4.56-25.38 2.2-34.8.79-16.16-2.47-28.51-3.39-40.21-15.13C244.57 24.71 242 0 242 0H0s69.52 22.74 97.52 68.59c16.56 27.11 14.14 58.49 9.92 74.73C170 140 221.46 140 273 158.57c69.23 24.93 83.2 76.19 90 93.6 6.77-17.41 20.75-68.67 90-93.6 51.54-18.56 103-18.59 165.56-15.25-4.21-16.24-6.63-47.62 9.93-74.73C656.43 22.74 726 0 726 0z'/%3E%3C/svg%3E") no-repeat 50% 50%;
+    -webkit-mask-size: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    transform: translateY(8px)
+  }
+
+  .documentation-masked-btn:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0px 0 0 0 white;
+    transition: all 2s ease;
+  }
+
+  .documentation-masked-btn:hover:after {
+    box-shadow: 0px -13px 56px 12px #ffffffa6;
+  }
+
+  .documentation-masked-btn span {
+    position: absolute;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 100;
+    left: 50%;
+    top: 39%;
+    letter-spacing: 3px;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    color: black;
+    transition: all 2s ease;
+  }
+
+  .documentation-masked-btn:hover span {
+    color: white;
+  }
+
+  .documentation-masked-btn:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+  }
+
+  .documentation-masked-btn:hover:before {
+    width: 100%;
+  }
+
+  .socialContainer:hover {
+    transition-duration: 0.3s;
+  }
+
+  /* LinkedIn */
+  .containerLinkedIn:hover {
+    background-color: #0072b1;
+    transition-duration: 0.3s;
+  }
+
+  /* GitHub */
+  .containerGitHub:hover {
+    background-color: #333;
+    transition-duration: 0.3s;
+  }
+
+  .socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: 0.3s;
+  }
+
+  .socialSvg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .socialSvg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+  }
+
+  @keyframes slide-in-top {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Loader Animation from Uiverse.io by dexter-st */
+  .loader-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 60px;
+    width: auto;
+    margin: 1rem 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    user-select: none;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  }
+
+  @media (min-width: 640px) {
+    .loader-wrapper {
+      font-size: 1.4em;
+    }
+  }
+
+  .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: transparent;
+    mask: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 6px,
+      black 7px,
+      black 8px
+    );
+  }
+
+  .loader::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 50% 50%, #ff0 0%, transparent 50%),
+      radial-gradient(circle at 45% 45%, #f00 0%, transparent 45%),
+      radial-gradient(circle at 55% 55%, #0ff 0%, transparent 45%),
+      radial-gradient(circle at 45% 55%, #0f0 0%, transparent 45%),
+      radial-gradient(circle at 55% 45%, #00f 0%, transparent 45%);
+    mask: radial-gradient(
+      circle at 50% 50%,
+      transparent 0%,
+      transparent 10%,
+      black 25%
+    );
+    animation:
+      transform-animation 3s infinite alternate,
+      opacity-animation 6s infinite;
+    animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
+  }
+
+  @keyframes transform-animation {
+    0% {
+      transform: translate(-55%);
+    }
+    100% {
+      transform: translate(55%);
+    }
+  }
+
+  @keyframes opacity-animation {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    65% {
+      opacity: 0;
+    }
+  }
+
+  .loader-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: loader-letter-anim 6s infinite linear;
+    z-index: 2;
+  }
+
+  .loader-letter:nth-child(1) {
+    animation-delay: 0.15s;
+  }
+
+  .loader-letter:nth-child(2) {
+    animation-delay: 0.3075s;
+  }
+
+  .loader-letter:nth-child(3) {
+    animation-delay: 0.465s;
+  }
+
+  .loader-letter:nth-child(4) {
+    animation-delay: 0.6225s;
+  }
+
+  .loader-letter:nth-child(5) {
+    animation-delay: 0.7815s;
+  }
+
+  .loader-letter:nth-child(6) {
+    animation-delay: 0.939s;
+  }
+
+  .loader-letter:nth-child(7) {
+    animation-delay: 1.0965s;
+  }
+
+  .loader-letter:nth-child(8) {
+    animation-delay: 1.2555s;
+  }
+
+  .loader-letter:nth-child(9) {
+    animation-delay: 1.413s;
+  }
+
+  .loader-letter:nth-child(10) {
+    animation-delay: 1.5705s;
+  }
+
+  .loader-letter:nth-child(11) {
+    animation-delay: 1.728s;
+  }
+
+  .loader-letter:nth-child(12) {
+    animation-delay: 1.8855s;
+  }
+
+  .loader-letter:nth-child(13) {
+    animation-delay: 2.043s;
+  }
+
+  .loader-letter:nth-child(14) {
+    animation-delay: 2.2005s;
+  }
+
+  .loader-letter:nth-child(15) {
+    animation-delay: 2.358s;
+  }
+
+  .loader-letter:nth-child(16) {
+    animation-delay: 2.5155s;
+  }
+
+  .loader-letter:nth-child(17) {
+    animation-delay: 2.673s;
+  }
+
+  .loader-letter:nth-child(18) {
+    animation-delay: 2.8305s;
+  }
+
+  .loader-letter:nth-child(19) {
+    animation-delay: 2.988s;
+  }
+
+  .loader-letter:nth-child(20) {
+    animation-delay: 3.1455s;
+  }
+
+  .loader-letter:nth-child(21) {
+    animation-delay: 3.303s;
+  }
+
+  .loader-letter:nth-child(22) {
+    animation-delay: 3.4605s;
+  }
+
+  .loader-letter:nth-child(23) {
+    animation-delay: 3.618s;
+  }
+
+  .loader-letter:nth-child(24) {
+    animation-delay: 3.7755s;
+  }
+
+  .loader-letter:nth-child(25) {
+    animation-delay: 3.933s;
+  }
+
+  .loader-letter:nth-child(26) {
+    animation-delay: 4.0905s;
+  }
+
+  .loader-letter:nth-child(27) {
+    animation-delay: 4.248s;
+  }
+
+  .loader-letter:nth-child(28) {
+    animation-delay: 4.4055s;
+  }
+
+  .loader-letter:nth-child(29) {
+    animation-delay: 4.563s;
+  }
+
+  .loader-letter:nth-child(30) {
+    animation-delay: 4.7205s;
+  }
+
+  .loader-letter:nth-child(31) {
+    animation-delay: 4.878s;
+  }
+
+  .loader-letter:nth-child(32) {
+    animation-delay: 5.0355s;
+  }
+
+  .loader-letter:nth-child(33) {
+    animation-delay: 5.193s;
+  }
+
+  .loader-letter:nth-child(34) {
+    animation-delay: 5.3505s;
+  }
+
+  .loader-letter:nth-child(35) {
+    animation-delay: 5.508s;
+  }
+
+  .loader-letter:nth-child(36) {
+    animation-delay: 5.6655s;
+  }
+
+  .loader-letter:nth-child(37) {
+    animation-delay: 5.823s;
+  }
+
+  .loader-letter:nth-child(38) {
+    animation-delay: 5.9805s;
+  }
+
+  @keyframes loader-letter-anim {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+      text-shadow: 0 0 4px #fff;
+      transform: scale(1.1) translateY(-2px);
+    }
+    20% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+  button:not([disabled]).border-primary,
+  button:not([disabled])[class*="border-primary"]:not([class*="border-transparent"]) {
+    --color: hsl(var(--primary));
+  }
+
+  button:not([disabled]).border-primary:hover,
+  button:not([disabled])[class*="border-primary"]:not([class*="border-transparent"]):hover {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+}
+
+@layer utilities {
+  @keyframes aurora {
+    0% {
+      background-position: 50% 50%, 50% 50%;
+    }
+    50% {
+      background-position: 0% 50%, 100% 50%;
+    }
+    100% {
+      background-position: 50% 50%, 50% 50%;
+    }
+  }
+
+  .animate-aurora {
+    animation: aurora 10s ease-in-out infinite;
+  }
+}
