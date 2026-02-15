@@ -16,6 +16,16 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+    // Increase chunk size warning limit and provide manual chunking for large vendor libs
+    chunkSizeWarningLimit: 1200, // KB
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom', 'recharts', 'framer-motion'],
+          three: ['three', '@react-three/fiber', '@react-three/drei']
+        }
+      }
+    }
   },
   plugins: [react(), expressPlugin(), openDevInChrome()],
   resolve: {
