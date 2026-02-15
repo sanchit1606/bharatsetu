@@ -88,7 +88,7 @@ const App = () => (
           {/* Main Pages */}
           <Route path="/" element={<LayoutWrapper><Index /></LayoutWrapper>} />
           <Route path="/about" element={<LayoutWrapper><About /></LayoutWrapper>} />
-          <Route path="/documentation" element={<LayoutWrapper><Documentation /></LayoutWrapper>} />
+          <Route path="/developer" element={<LayoutWrapper><Documentation /></LayoutWrapper>} />
           <Route path="/technical" element={<LayoutWrapper><Technical /></LayoutWrapper>} />
           <Route path="/contact" element={<LayoutWrapper><Contact /></LayoutWrapper>} />
 

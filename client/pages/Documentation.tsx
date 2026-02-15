@@ -10,7 +10,7 @@ export default function Documentation() {
       <TubesBackground className="min-h-[380px]">
         <div className="pointer-events-auto">
           <HeroSection
-            title="BharatSetu Documentation"
+            title="BharatSetu Developer"
             subtitle="Connecting Communities to Information, Resources & Public Services"
             className="bg-none bg-transparent [&_h1]:text-white [&_p]:text-white !py-12 sm:!py-16 lg:!py-20"
           >
@@ -34,48 +34,7 @@ export default function Documentation() {
           <DeveloperCard />
         </div>
       </Section>
-      {/* Feature cards */}
-      <Section className="py-8">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex flex-row items-stretch justify-start gap-6 pl-4 flex-nowrap">
-            <GlowCard glowColor="blue" size="md" className="flex flex-1 min-w-0 items-end justify-center p-6">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-foreground">Product Label Auditor</h3>
-                <p className="text-sm text-foreground/70">Health & Pharma / Cosmetic</p>
-                <p className="text-sm text-foreground/70 mt-2">Label Padhega India</p>
-              </div>
-            </GlowCard>
-
-            <GlowCard glowColor="purple" size="md" className="flex flex-1 min-w-0 items-end justify-center p-6">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-foreground">CivicSense</h3>
-                <p className="text-sm text-foreground/70">Awareness & Reporting</p>
-              </div>
-            </GlowCard>
-
-            <GlowCard glowColor="green" size="md" className="flex flex-1 min-w-0 items-end justify-center p-6">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-foreground">Document & Legal Assistant</h3>
-                <p className="text-sm text-foreground/70">Legal & Financial Rights</p>
-              </div>
-            </GlowCard>
-
-            <GlowCard glowColor="orange" size="md" className="flex flex-1 min-w-0 items-end justify-center p-6">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-foreground">Lab Report Analyzer</h3>
-                <p className="text-sm text-foreground/70">Health Tools</p>
-              </div>
-            </GlowCard>
-
-            <GlowCard glowColor="red" size="md" className="flex flex-1 min-w-0 items-end justify-center p-6">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-foreground">GynaeCare</h3>
-                <p className="text-sm text-foreground/70">Women's Health Module</p>
-              </div>
-            </GlowCard>
-          </div>
-        </div>
-      </Section>
+      {/* Feature cards removed per request */}
     </div>
   );
 }

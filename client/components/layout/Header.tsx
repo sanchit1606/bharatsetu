@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const NAVIGATION_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Features', href: '/#features' },
-  { label: 'Documentation', href: '/documentation' },
+  { label: 'Developer', href: '/developer' },
   { label: 'Technical', href: '/technical' },
   { label: 'Contact', href: '/contact' },
 ];
