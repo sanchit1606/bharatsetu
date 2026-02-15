@@ -1,0 +1,10 @@
+{
+  "approvedBuiltDependencies": [
+    "@swc/core",
+    "esbuild",
+    "tesseract.js"
+  ],
+  "generatedBy": "manual",
+  "note": "This file lists packages recommended to allow running install/build scripts on Vercel. Please review before trusting."
+}
+
