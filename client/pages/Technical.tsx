@@ -266,14 +266,17 @@ const InteractiveImageViewer = ({ src, alt = "User flow" }: { src: string; alt?:
     const img = imgRef.current;
     if (!el || !img || !img.naturalWidth) return;
     const rect = el.getBoundingClientRect();
-    const scaleToFit = Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight) * 0.95;
-    setScale(clamp(scaleToFit));
-    setTranslate({ x: 0, y: 0 });
+    const scaleToFit = clamp(Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight) * 0.95);
+    const iw = img.naturalWidth * scaleToFit;
+    const ih = img.naturalHeight * scaleToFit;
+    const tx = (rect.width - iw) / 2;
+    const ty = (rect.height - ih) / 2;
+    setScale(scaleToFit);
+    setTranslate({ x: tx, y: ty });
   };
 
   const reset = () => {
-    setScale(1);
-    centerImage();
+    fitToContainer();
   };
 
   return (
