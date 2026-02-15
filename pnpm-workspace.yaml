@@ -1,4 +1,4 @@
 approvedBuiltDependencies:
   - tesseract.js
   - esbuild
-  - @swc/core
+  - "@swc/core"
