@@ -30,7 +30,7 @@ For detailed technical documentation, check out [@BharatSetu_Technical_Documenta
 
 ## Live Demo
 
-**Deployed Prototype:** [Coming Soon]
+**Deployed Prototype:** [https://bharatsetuu.netlify.app/](https://bharatsetuu.netlify.app/)
 
 ---
 
