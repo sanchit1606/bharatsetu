@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 type TocItem = {
   id: string;
@@ -156,6 +156,186 @@ const TOC: TocItem[] = [
   },
   { id: "9", title: "9. References" },
 ];
+
+const InteractiveImageViewer = ({ src, alt = "User flow" }: { src: string; alt?: string }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [scale, setScale] = useState(1);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const isPanningRef = useRef(false);
+  const lastPosRef = useRef<{ x: number; y: number } | null>(null);
+
+  const MIN_SCALE = 0.1;
+  const MAX_SCALE = 5;
+  const clamp = (v: number) => Math.min(MAX_SCALE, Math.max(MIN_SCALE, v));
+
+  // center image after load or when container resizes
+  const centerImage = () => {
+    const el = containerRef.current;
+    const img = imgRef.current;
+    if (!el || !img || !img.naturalWidth) return;
+    const rect = el.getBoundingClientRect();
+    const iw = img.naturalWidth * scale;
+    const ih = img.naturalHeight * scale;
+    setTranslate({ x: (rect.width - iw) / 2, y: (rect.height - ih) / 2 });
+  };
+
+  useEffect(() => {
+    const onResize = () => centerImage();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scale]);
+
+  const onImgLoad = () => {
+    centerImage();
+  };
+
+  // Wheel zoom keeping cursor point stable
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = -e.deltaY;
+      const factor = delta > 0 ? 1.12 : 0.88;
+      const prevScale = scale;
+      const newScale = clamp(prevScale * factor);
+      const rect = el.getBoundingClientRect();
+      const cursorX = e.clientX - rect.left;
+      const cursorY = e.clientY - rect.top;
+      // image coordinate under cursor (before zoom)
+      const imgCoordX = (cursorX - translate.x) / prevScale;
+      const imgCoordY = (cursorY - translate.y) / prevScale;
+      // new translate so that imgCoord maps to same cursor position
+      const newTx = cursorX - imgCoordX * newScale;
+      const newTy = cursorY - imgCoordY * newScale;
+      setScale(newScale);
+      setTranslate({ x: newTx, y: newTy });
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [scale, translate]);
+
+  const onPointerDown = (e: any) => {
+    const el = containerRef.current;
+    if (!el) return;
+    try { el.setPointerCapture?.(e.pointerId); } catch {}
+    isPanningRef.current = true;
+    lastPosRef.current = { x: e.clientX, y: e.clientY };
+    if (el) el.style.cursor = "grabbing";
+  };
+
+  const onPointerMove = (e: any) => {
+    if (!isPanningRef.current || !lastPosRef.current) return;
+    const dx = e.clientX - lastPosRef.current.x;
+    const dy = e.clientY - lastPosRef.current.y;
+    lastPosRef.current = { x: e.clientX, y: e.clientY };
+    setTranslate((t) => ({ x: t.x + dx, y: t.y + dy }));
+  };
+
+  const onPointerUp = (e: any) => {
+    const el = containerRef.current;
+    try { el?.releasePointerCapture?.(e.pointerId); } catch {}
+    isPanningRef.current = false;
+    lastPosRef.current = null;
+    if (el) el.style.cursor = "grab";
+  };
+
+  const zoomAtCenter = (factor: number) => {
+    const el = containerRef.current;
+    if (!el) {
+      setScale((s) => clamp(s * factor));
+      return;
+    }
+    const rect = el.getBoundingClientRect();
+    const center = { x: rect.width / 2, y: rect.height / 2 };
+    // reuse wheel math by computing image coord under center
+    const prevScale = scale;
+    const newScale = clamp(prevScale * factor);
+    const imgCoordX = (center.x - translate.x) / prevScale;
+    const imgCoordY = (center.y - translate.y) / prevScale;
+    const newTx = center.x - imgCoordX * newScale;
+    const newTy = center.y - imgCoordY * newScale;
+    setScale(newScale);
+    setTranslate({ x: newTx, y: newTy });
+  };
+
+  const fitToContainer = () => {
+    const el = containerRef.current;
+    const img = imgRef.current;
+    if (!el || !img || !img.naturalWidth) return;
+    const rect = el.getBoundingClientRect();
+    const scaleToFit = Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight) * 0.95;
+    setScale(clamp(scaleToFit));
+    setTranslate({ x: 0, y: 0 });
+  };
+
+  const reset = () => {
+    setScale(1);
+    centerImage();
+  };
+
+  return (
+    <div className="relative my-6">
+      <div className="absolute right-2 top-2 z-20 flex space-x-2 items-center">
+        <button onClick={() => zoomAtCenter(1.2)} className="px-2 py-1 bg-card border rounded">Zoom +</button>
+        <button onClick={() => zoomAtCenter(0.8)} className="px-2 py-1 bg-card border rounded">Zoom −</button>
+        <button onClick={fitToContainer} className="px-2 py-1 bg-card border rounded">Fit</button>
+        <button onClick={reset} className="px-2 py-1 bg-card border rounded">Reset</button>
+      </div>
+      <div
+        ref={containerRef}
+        className="w-full h-[640px] bg-muted/5 rounded overflow-hidden relative"
+        style={{ touchAction: "none", cursor: "grab" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
+        <img
+          ref={imgRef}
+          src={src}
+          alt={alt}
+          draggable={false}
+          onLoad={onImgLoad}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            transform: `translate(${translate.x}px, ${translate.y}px) scale(${scale})`,
+            transformOrigin: "0 0",
+            transition: isPanningRef.current ? "none" : "transform 120ms ease-out",
+            userSelect: "none",
+            touchAction: "none",
+            display: "block",
+            maxWidth: "none",
+            height: "auto",
+            willChange: "transform",
+          }}
+        />
+      </div>
+      <div className="flex items-center justify-between mt-2">
+        <p className="text-sm text-foreground/60">Use mouse wheel or the buttons to zoom. Click and drag to pan (grab to move up/down).</p>
+        <div className="flex items-center space-x-2">
+          <label className="text-xs">Zoom</label>
+          <input
+            type="range"
+            min={MIN_SCALE}
+            max={MAX_SCALE}
+            step={0.01}
+            value={scale}
+            onChange={(e) => {
+              const newS = clamp(Number(e.target.value));
+              setScale(newS);
+            }}
+            className="w-40"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function Technical() {
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -387,6 +567,11 @@ export default function Technical() {
               <li><strong>Cost-Effective:</strong> Entire system operates within free tier limits</li>
               <li><strong>Responsible AI:</strong> Clear disclaimers and limitations, especially for health features</li>
             </ul>
+
+            <h3 id="1.3" className="mt-6">1.3 User flow diagram</h3>
+            <div className="max-w-4xl mx-auto">
+              <InteractiveImageViewer src="/USER-FLOW-FINAL.svg" alt="User flow diagram" />
+            </div>
 
             <h2 id="2" className="mt-8">2. Feature 1: Product Label Auditor (Label Padhega India)</h2>
             <h3 id="2.1" className="mt-4">2.1 Problem Statement</h3>

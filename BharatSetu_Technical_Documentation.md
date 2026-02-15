@@ -61,6 +61,9 @@ The platform leverages Google Gemini 1.5 Flash as the primary language model, wi
 - **Accessibility:** Voice input/output for low-literacy users
 - **Cost-Effective:** Entire system operates within free tier limits
 - **Responsible AI:** Clear disclaimers and limitations, especially for health features
+### 1.3 User flow diagram
+
+![User flow diagram](./user-flow-final.png)
 
 ---
 
