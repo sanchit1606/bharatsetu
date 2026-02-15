@@ -40,16 +40,26 @@ For detailed technical documentation, check out [@technical-documentation.page](
 
 **Developer:** Sanchit Nipanikar
 
-- **LinkedIn:** https://www.linkedin.com/in/sanchit1606
-- **Portfolio:** https://portfolio-three-silk-62.vercel.app/
-- **GitHub:** https://github.com/sanchit1606
-- **Email:** sanchitnipanikar@gmail.com
+<p>
+  <a href="https://www.linkedin.com/in/sanchit1606" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/LinkedIn-Sanchit%20Nipanikar-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="https://portfolio-three-silk-62.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Portfolio-Website-7A7A7A?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio" />
+  </a>
+  <a href="https://github.com/sanchit1606" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/GitHub-sanchit1606-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="mailto:sanchitnipanikar@gmail.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Email-sanchitnipanikar%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+</p>
 
 ---
 
 ## License
 
-This project is developed for the AWS Hackathon 2026. All rights reserved.
+This project is developed by Sanchit for the AI for Bharat Hackathon by AWS x Hack2Skill
 
 ---
 ---
