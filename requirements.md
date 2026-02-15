@@ -631,7 +631,5 @@ Five integrated AI-powered modules providing multilingual, accessible, privacy-f
 | 1.0 | February 2026 | BharatSetu Team | Initial requirements document |
 
 ---
-
-**Document Status:** Approved for Hackathon Submission  
-**Next Review Date:** Post-Hackathon  
-**Contact:** [Team Contact Information]
+ 
+**Contact:** [sanchitnipanikar@gmail.com]
