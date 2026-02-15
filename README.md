@@ -24,7 +24,7 @@ As mentioned under submission guidelines, here are the Kiro-generated and modifi
 - **Requirements Specification:** [requirements.md](./requirements.md)
 - **System Design Document:** [design.md](./design.md)
 
-For detailed technical documentation, check out [@technical-documentation.page](./BharatSetu_Technical_Documentation.md)
+For detailed technical documentation, check out [@BharatSetu_Technical_Documentation.md](./BharatSetu_Technical_Documentation.md)
 
 ---
 
